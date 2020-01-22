@@ -41,6 +41,7 @@ final class ViewController: UIViewController {
         rangeSliderCurrency.numberFormatter.maximumFractionDigits = 2
         rangeSliderCurrency.minLabelFont = UIFont(name: "ChalkboardSE-Regular", size: 15.0)!
         rangeSliderCurrency.maxLabelFont = UIFont(name: "ChalkboardSE-Regular", size: 15.0)!
+        rangeSliderCurrency.labelCornerRadiusAndColor = (10.0, UIColor.blue)
 
         // custom number formatter range slider
         rangeSliderCustom.delegate = self

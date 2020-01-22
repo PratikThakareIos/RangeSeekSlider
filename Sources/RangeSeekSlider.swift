@@ -84,6 +84,15 @@ import UIKit
         }
     }
 
+    open var labelCornerRadiusAndColor: (radius: CGFloat, color: UIColor) = (radius: 10.0, color: UIColor.red) {
+        didSet {
+            maxLabel.cornerRadius = labelCornerRadiusAndColor.radius
+            maxLabel.borderColor = labelCornerRadiusAndColor.color.cgColor
+            minLabel.cornerRadius = labelCornerRadiusAndColor.radius
+            minLabel.borderColor = labelCornerRadiusAndColor.color.cgColor
+            
+        }
+    }
     /// Each handle in the slider has a label above it showing the current selected value. By default, this is displayed as a decimal format.
     /// You can update this default here by updating properties of NumberFormatter. For example, you could supply a currency style, or a prefix or suffix.
     open var numberFormatter: NumberFormatter = {
@@ -418,12 +427,14 @@ import UIKit
         minLabel.alignmentMode = CATextLayerAlignmentMode.center
         minLabel.frame = labelFrame
         minLabel.contentsScale = UIScreen.main.scale
+        minLabel.borderWidth = 2.0
         layer.addSublayer(minLabel)
 
         maxLabelFont = UIFont.systemFont(ofSize: labelFontSize)
         maxLabel.alignmentMode = CATextLayerAlignmentMode.center
         maxLabel.frame = labelFrame
         maxLabel.contentsScale = UIScreen.main.scale
+        maxLabel.borderWidth = 2.0
         layer.addSublayer(maxLabel)
 
         setupStyle()
@@ -551,9 +562,11 @@ import UIKit
     private func updateLabelPositions() {
         // the center points for the labels are X = the same x position as the relevant handle. Y = the y position of the handle minus half the height of the text label, minus some padding.
 
-        minLabel.frame.size = minLabelTextSize
-        maxLabel.frame.size = maxLabelTextSize
-
+        minLabel.frame.size.width = minLabelTextSize.width + 20.0
+        minLabel.frame.size.height = minLabelTextSize.height + 3.0
+        maxLabel.frame.size.width = maxLabelTextSize.width + 20.0
+        maxLabel.frame.size.height = maxLabelTextSize.height + 3.0
+        //maxLabel.frame.size = maxLabelTextSize
         if labelsFixed {
             updateFixedLabelPositions()
             return
